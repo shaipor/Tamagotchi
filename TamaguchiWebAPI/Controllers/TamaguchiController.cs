@@ -26,7 +26,7 @@ namespace TamaguchiWebAPI.Controllers
         {
             Players p = context.Login(userName, pass);
 
-            //Check user name and password
+            //Check user name and password.
             if (p != null)
             {
                 PlayerDTO pDTO = new PlayerDTO(p);
