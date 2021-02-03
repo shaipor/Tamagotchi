@@ -38,7 +38,7 @@ namespace TamaguchiWebAPI.Controllers
             }
             else
             {
-                
+
                 Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
                 return null;
             }
@@ -72,26 +72,24 @@ namespace TamaguchiWebAPI.Controllers
             }
         }
 
-        [Route("GetFiddingActions")]
+        [Route("GetFeedingActions")]
         [HttpGet]
-        public List<ActionsDTO> GetFiddingActions()
+        public List<ActionsDTO> GetFeedingActions()
         {
             PlayerDTO pDto = HttpContext.Session.GetObject<PlayerDTO>("player");
-            
+
             if (pDto != null)
             {
                 Players p = context.Players.Where(pp => pp.UserName == pDto.UserName).FirstOrDefault();
                 List<ActionsDTO> list = new List<ActionsDTO>();
-                
+
                 if (p != null)
                 {
                     foreach (Actions ac in context.showFeedingActions())
                     {
-                        if(ac.ActionTypeId==1)
-                        {
-                            list.Add(new ActionsDTO(ac));
-                        }
-                        
+
+                        list.Add(new ActionsDTO(ac));
+
                     }
                 }
                 Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
@@ -105,8 +103,8 @@ namespace TamaguchiWebAPI.Controllers
             }
         }
 
-    }   
+    }
 
-    
+
 }
 
