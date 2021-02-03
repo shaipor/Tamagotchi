@@ -6,7 +6,7 @@ using TamaguchiBL.Models;
 
 namespace TamaguchiWebAPI.DataTransferObjects
 {
-    public class AnimalDTO
+    public class PetsDTO
     {
         public int petId { get; set; }
         public string petName { get; set; }
@@ -17,8 +17,8 @@ namespace TamaguchiWebAPI.DataTransferObjects
         public int HygieneLevel { get; set; }
         public int HappinesLevel { get; set; }
         
-        public AnimalDTO() { }
-        public AnimalDTO(Pets a)
+        public PetsDTO() { }
+        public PetsDTO(Pets a)
         {
             petId = a.PetId;
            petName = a.PetName;

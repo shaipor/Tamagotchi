@@ -44,21 +44,30 @@ namespace TamaguchiWebAPI.Controllers
             }
         }
 
+        [Route("SignUp")]
+        [HttpGet]
+        public PlayerDTO SignUp([FromBody] string UserName, string PlayerName,  string PlayerFamilyName, string Email, DateTime BirthDate)
+        {
+            Players p = new Players(PlayerName);
+            PlayerDTO pDTO = HttpContext.Session.GetObject<PlayerDTO>("player");
+            Players pp= context.AddPlayer(p);
+        }
+
         [Route("GetAnimals")]
         [HttpGet]
-        public List<AnimalDTO> GetAnimals()
+        public List<PetsDTO> GetAnimals()
         {
             PlayerDTO pDto = HttpContext.Session.GetObject<PlayerDTO>("player");
             //Check if user logged in!
             if (pDto != null)
             {
                 Players p = context.Players.Where(pp => pp.UserName == pDto.UserName).FirstOrDefault();
-                List<AnimalDTO> list = new List<AnimalDTO>();
+                List<PetsDTO> list = new List<PetsDTO>();
                 if (p != null)
                 {
                     foreach (Pets pa in p.Pets)
                     {
-                        list.Add(new AnimalDTO(pa));
+                        list.Add(new PetsDTO(pa));
                     }
                 }
                 Response.StatusCode = (int)System.Net.HttpStatusCode.OK;

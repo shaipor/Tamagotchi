@@ -10,17 +10,23 @@ namespace TamaguchiWebAPI.DataTransferObjects
     {
         public string UserName { get; set; }
         public string PlayerName { get; set; }
-        public string PlayerFamilyName { get; set; }
+        public string LastName { get; set; }
         public string Email { get; set; }
         public DateTime BirthDate { get; set; }
+        public string Gender { get; set; }
+        public string Password { get; set; }
         public PlayerDTO() { }
         public PlayerDTO(Players p)
         {
-            UserName = p.UserName;
-            PlayerFamilyName = p.LastName;
-            PlayerName = p.FirstName;
-            BirthDate = p.PlayerBirthDate;
-            Email = p.Mail;
+
+            PlayerDTO P = new PlayerDTO();
+            P.UserName = UserName;
+            P.PlayerName = PlayerName;
+            P.LastName = LastName;
+            P.Email = Email;
+            P.Gender = Gender;
+            P.BirthDate = BirthDate;
+            P.Password = Password;
         }
     }
 }
