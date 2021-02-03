@@ -44,21 +44,21 @@ namespace TamaguchiWebAPI.Controllers
             }
         }
 
-        [Route("GetAnimals")]
+        [Route("GetPets")]
         [HttpGet]
-        public List<AnimalDTO> GetAnimals()
+        public List<PetDTO> GetPets()
         {
             PlayerDTO pDto = HttpContext.Session.GetObject<PlayerDTO>("player");
             //Check if user logged in!
             if (pDto != null)
             {
                 Players p = context.Players.Where(pp => pp.UserName == pDto.UserName).FirstOrDefault();
-                List<AnimalDTO> list = new List<AnimalDTO>();
+                List<PetDTO> list = new List<PetDTO>();
                 if (p != null)
                 {
                     foreach (Pets pa in p.Pets)
                     {
-                        list.Add(new AnimalDTO(pa));
+                        list.Add(new PetDTO(pa));
                     }
                 }
                 Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
@@ -72,5 +72,41 @@ namespace TamaguchiWebAPI.Controllers
             }
         }
 
-    }
+        [Route("GetFiddingActions")]
+        [HttpGet]
+        public List<ActionsDTO> GetFiddingActions()
+        {
+            PlayerDTO pDto = HttpContext.Session.GetObject<PlayerDTO>("player");
+            
+            if (pDto != null)
+            {
+                Players p = context.Players.Where(pp => pp.UserName == pDto.UserName).FirstOrDefault();
+                List<ActionsDTO> list = new List<ActionsDTO>();
+                
+                if (p != null)
+                {
+                    foreach (Actions ac in context.showFeedingActions())
+                    {
+                        if(ac.ActionTypeId==1)
+                        {
+                            list.Add(new ActionsDTO(ac));
+                        }
+                        
+                    }
+                }
+                Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+
+                return list;
+            }
+            else
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                return null;
+            }
+        }
+
+    }   
+
+    
 }
+
