@@ -103,6 +103,37 @@ namespace TamaguchiWebAPI.Controllers
             }
         }
 
+        //[Route("Feed")]
+        //[HttpGet]
+        //public List<ActionsDTO> Feed([FromQuery] int actionTypeNum)
+        //{
+        //    PlayerDTO pDto = HttpContext.Session.GetObject<PlayerDTO>("player");
+
+        //    if (pDto != null)
+        //    {
+        //        Players p = context.Players.Where(pp => pp.UserName == pDto.UserName).FirstOrDefault();
+        //        List<ActionsDTO> list = new List<ActionsDTO>();
+
+        //        if (p != null)
+        //        {
+        //            foreach (Actions ac in context.showFeedingActions())
+        //            {
+
+        //                list.Add(new ActionsDTO(ac));
+
+        //            }
+        //        }
+        //        Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+
+        //        return list;
+        //    }
+        //    else
+        //    {
+        //        Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+        //        return null;
+        //    }
+        //}
+
     }
 
 
