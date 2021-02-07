@@ -6,7 +6,11 @@ using TamaguchiBL.Models;
 
 namespace TamaguchiWebAPI.DataTransferObjects
 {
-    public class PetDTO
+
+
+
+    public class PetsDTO
+
     {
         public int petId { get; set; }
         public string petName { get; set; }
@@ -16,9 +20,10 @@ namespace TamaguchiWebAPI.DataTransferObjects
         public int HungerLevel { get; set; }
         public int HygieneLevel { get; set; }
         public int HappinesLevel { get; set; }
-        
-        public PetDTO() { }
-        public PetDTO(Pets a)
+        public int lifeCycleId { get; set; }
+
+        public PetsDTO() { }
+        public PetsDTO(Pets a)
         {
             petId = a.PetId;
            petName = a.PetName;
@@ -28,6 +33,7 @@ namespace TamaguchiWebAPI.DataTransferObjects
             HungerLevel = a.HungerLevel;
             HygieneLevel = a.HygieneLevel;
             HappinesLevel = a.HappinesLevel;
+            lifeCycleId= a.LifeCycleId;
         }
     }
 }

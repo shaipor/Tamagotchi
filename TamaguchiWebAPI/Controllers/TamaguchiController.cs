@@ -46,19 +46,19 @@ namespace TamaguchiWebAPI.Controllers
 
         [Route("GetPets")]
         [HttpGet]
-        public List<PetDTO> GetPets()
+        public List<PetsDTO> GetPets()
         {
             PlayerDTO pDto = HttpContext.Session.GetObject<PlayerDTO>("player");
             //Check if user logged in!
             if (pDto != null)
             {
                 Players p = context.Players.Where(pp => pp.UserName == pDto.UserName).FirstOrDefault();
-                List<PetDTO> list = new List<PetDTO>();
+                List<PetsDTO> list = new List<PetsDTO>();
                 if (p != null)
                 {
                     foreach (Pets pa in p.Pets)
                     {
-                        list.Add(new PetDTO(pa));
+                        list.Add(new PetsDTO(pa));
                     }
                 }
                 Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
@@ -103,36 +103,28 @@ namespace TamaguchiWebAPI.Controllers
             }
         }
 
-        //[Route("Feed")]
-        //[HttpGet]
-        //public List<ActionsDTO> Feed([FromQuery] int actionTypeNum)
-        //{
-        //    PlayerDTO pDto = HttpContext.Session.GetObject<PlayerDTO>("player");
+        [Route("FeedAnimal")]
+        [HttpGet]
+        public void Feed([FromQuery] int actionId)
+        {
+            PlayerDTO pDto = HttpContext.Session.GetObject<PlayerDTO>("player");
 
-        //    if (pDto != null)
-        //    {
-        //        Players p = context.Players.Where(pp => pp.UserName == pDto.UserName).FirstOrDefault();
-        //        List<ActionsDTO> list = new List<ActionsDTO>();
+            if (pDto != null)
+            {
+                Players p = context.Players.Where(pp => pp.UserName == pDto.UserName).FirstOrDefault();
+                p.Pets.Where(a => a.LifeCycleId == 1).FirstOrDefault().FeedAnimal(context.Actions.Where(x=>x.ActionId== actionId).FirstOrDefault());
 
-        //        if (p != null)
-        //        {
-        //            foreach (Actions ac in context.showFeedingActions())
-        //            {
+                
+                Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
 
-        //                list.Add(new ActionsDTO(ac));
-
-        //            }
-        //        }
-        //        Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-
-        //        return list;
-        //    }
-        //    else
-        //    {
-        //        Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-        //        return null;
-        //    }
-        //}
+                return ;
+            }
+            else
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                return ;
+            }
+        }
 
     }
 
