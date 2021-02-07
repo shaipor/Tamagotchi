@@ -52,11 +52,11 @@ namespace TamaguchiWebAPI.Controllers
             //Check if user logged in!
             if (pDto != null)
             {
-                List<Action> list = context.GetAllGames();
+                List<Actions> list = context.GetAllGames();
                 List<ActionsDTO> listDTO = new List<ActionsDTO>();
                 if (list != null)
                 {
-                    foreach (Action a in list)
+                    foreach (Actions a in list)
                     {
                         listDTO.Add(new ActionsDTO(a));
                     }
@@ -79,7 +79,7 @@ namespace TamaguchiWebAPI.Controllers
             //Check if user logged in!
             if (pDto != null)
             {
-                Action action = new Action
+                Actions action = new Actions
                 {
                     actionName = actionsDTO.actionName,
                     actionEffection = actionsDTO.actionEffection,
