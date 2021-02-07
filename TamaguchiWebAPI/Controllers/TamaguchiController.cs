@@ -104,7 +104,7 @@ namespace TamaguchiWebAPI.Controllers
         }
 
         [Route("FeedAnimal")]
-        [HttpGet]
+        [HttpPost]
         public void Feed([FromQuery] int actionId)
         {
             PlayerDTO pDto = HttpContext.Session.GetObject<PlayerDTO>("player");
@@ -125,6 +125,22 @@ namespace TamaguchiWebAPI.Controllers
                 return ;
             }
         }
+        [Route("HasActiveAnimal")]
+        [HttpPost]
+        public bool HasActiveAnimal()
+        {
+            PlayerDTO pDto = HttpContext.Session.GetObject<PlayerDTO>("player");
+
+            if (pDto != null)
+            {
+                Players p = context.Players.Where(pp => pp.UserName == pDto.UserName).FirstOrDefault();
+                return p.HasActiveAnimal();
+            }
+            else
+                return false;
+        }
+
+
 
     }
 
