@@ -82,9 +82,9 @@ namespace TamaguchiWebAPI.Controllers
             {
                 Actions action = new Actions
                 {
-                    actionName = actionsDTO.actionName,
-                    actionEffection = actionsDTO.actionEffection,
-                    actionId = actionsDTO.actionId
+                    ActionName = actionsDTO.actionName,
+                    ActionEffection = actionsDTO.actionEffection,
+                    ActionId = actionsDTO.actionId
                 };
                 context.Play(action, pDto.UserName);
                 Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
