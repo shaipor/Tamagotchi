@@ -20,6 +20,7 @@ namespace TamaguchiWebAPI.Controllers
             this.context = context;
         }
         #endregion
+
         [Route("Login")]
         [HttpGet]
         public PlayerDTO Login([FromQuery] string userName, [FromQuery] string pass)
@@ -49,7 +50,7 @@ namespace TamaguchiWebAPI.Controllers
         public List<ActionsDTO> GetAllGames()
         {
             PlayerDTO pDto = HttpContext.Session.GetObject<PlayerDTO>("player");
-            //Check if user logged in!
+           
             if (pDto != null)
             {
                 List<Actions> list = context.GetAllGames();
@@ -76,7 +77,7 @@ namespace TamaguchiWebAPI.Controllers
         public void Play([FromBody] ActionsDTO actionsDTO)
         {
             PlayerDTO pDto = HttpContext.Session.GetObject<PlayerDTO>("player");
-            //Check if user logged in!
+           
             if (pDto != null)
             {
                 Actions action = new Actions
