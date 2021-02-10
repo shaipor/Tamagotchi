@@ -26,7 +26,7 @@ namespace TamaguchiWebAPI.DataTransferObjects
                 LastName = p.LastName;
                 Email = p.Mail;
                 Gender = p.Gender;
-                BirthDate = p.PlayerBirthDate;
+                BirthDate =p.PlayerBirthDate;
                 Password = p.Password;
             }
         }

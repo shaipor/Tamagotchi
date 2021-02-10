@@ -155,15 +155,15 @@ namespace TamaguchiWebAPI.Controllers
 
         [Route("FeedAnimal")]
         [HttpPost]
-        public void Feed([FromQuery] int actionId)
+        public void Feed([FromBody] int actionId)
         {
             PlayerDTO pDto = HttpContext.Session.GetObject<PlayerDTO>("player");
 
             if (pDto != null)
             {
                 Players p = context.Players.Where(pp => pp.UserName == pDto.UserName).FirstOrDefault();
-                p.Pets.Where(a => a.LifeCycleId == 1).FirstOrDefault().FeedAnimal(context.Actions.Where(x=>x.ActionId== actionId).FirstOrDefault());
-
+                p.Pets.Where(a => a.LifeCycleId == 0).FirstOrDefault().FeedAnimal(context.Actions.Where(x=>x.ActionId== actionId).FirstOrDefault());
+                 
                 
                 Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
 
