@@ -23,17 +23,17 @@ namespace TamaguchiWebAPI.DataTransferObjects
         public PetsDTO() { }
         public PetsDTO(Pets a)
         {
-            petId = this.petId;
-            petName = this.petName;
-            userName = this.userName;
-            petWeight = this.petWeight;
-            petAge = this.petAge;
-            BirthDate = this.BirthDate;
-            HungerLevel = this.HungerLevel;
-            HygieneLevel = this.HygieneLevel;
-            HappinesLevel = this.HappinesLevel;
-            StatusId = this.StatusId;
-            LifeCycleId = this.LifeCycleId;
+            petId = a.PetId;
+            petName = a.PetName;
+            userName = a.UserName; ;
+            petWeight = a.Weigth;
+            petAge = a.PetAge;
+            BirthDate = a.PetBirthDate;
+            HungerLevel = a.HungerLevel;
+            HygieneLevel = a.HygieneLevel;
+            HappinesLevel = a.HappinesLevel;
+            StatusId = a.StatusId;
+            LifeCycleId = a.LifeCycleId;
         }
     }
 }
