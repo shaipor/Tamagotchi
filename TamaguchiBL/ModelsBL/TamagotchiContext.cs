@@ -46,6 +46,15 @@ namespace TamaguchiBL.Models
             return list;
 
         }
+
+        public List<Actions> GetAllGames()
+        {
+            const int PLAYINGID = 2;
+            List<Actions> list = this.Actions.Where(a => a.ActionTypeId == PLAYINGID).ToList();
+            return list;
+
+        }
+
         public bool IsAlive(Players p)
         {
             const int DEAD_STATUS = 4;

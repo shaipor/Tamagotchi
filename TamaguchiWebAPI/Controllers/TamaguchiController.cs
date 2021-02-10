@@ -86,8 +86,9 @@ namespace TamaguchiWebAPI.Controllers
                     actionEffection = actionsDTO.actionEffection,
                     actionId = actionsDTO.actionId
                 };
-                context.Play(action, pDto.UserName);
-                Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                  Pets p = new Pets();
+                  p.Play(action, pDto.UserName);
+                  Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
             }
         }
 
