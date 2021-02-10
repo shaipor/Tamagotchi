@@ -66,6 +66,45 @@ namespace TamaguchiBL.Models
             
         }
 
+        public void Play(Actions a, string userName)
+        {
+            int HappinesLevel = this.HappinesLevel;
+            //write the activity
+            Actions activity = new Actions();
+
+            int ActionTypeId = a.ActionTypeId;
+            //Add more logic here!!
+            if (this.HappinesLevel + activity.ActionEffection <= 5)
+                HappinesLevel = this.HappinesLevel + activity.ActionEffection;
+            else
+                this.HappinesLevel = 5;
+            if (this.HappinesLevel >= 3)
+                this.StatusId = 1;
+
+            using (var context = new TamagotchiContext())
+            {
+                //update the animal
+                ActionsHistory newAction = new ActionsHistory();
+                newAction.UserName = this.UserName;
+                newAction.StatusId = this.StatusId;
+                newAction.PetId = this.PetId;
+                newAction.PetAge = this.PetAge;
+                newAction.Action = a;
+                newAction.ActionId = a.ActionId;
+                newAction.ActionTime = DateTime.Now;
+                newAction.LifeCycleId = this.LifeCycleId;
+                newAction.HungerLevel = this.HungerLevel;
+                newAction.HygieneLevel = this.HygieneLevel;
+                newAction.HappinesLevel = this.HappinesLevel;
+
+
+                //this.ActionsHistory.Add(newAction);
+                context.AddActionHistory(newAction);
+                context.SaveChanges();
+            }
+           
+        }
+
         //public bool HasActiveAnimal(Players player)
         //{
         //    return this.UserNameNavigation.Pets.Any(a => a.UserName != player.UserName);

@@ -20,6 +20,7 @@ namespace TamaguchiWebAPI.Controllers
             this.context = context;
         }
         #endregion
+
         [Route("Login")]
         [HttpGet]
         public PlayerDTO Login([FromQuery] string userName, [FromQuery] string pass)
@@ -43,6 +44,55 @@ namespace TamaguchiWebAPI.Controllers
                 return null;
             }
         }
+
+        [Route("GetAllGames")]
+        [HttpGet]
+        public List<ActionsDTO> GetAllGames()
+        {
+            PlayerDTO pDto = HttpContext.Session.GetObject<PlayerDTO>("player");
+           
+            if (pDto != null)
+            {
+                List<Actions> list = context.GetAllGames();
+                List<ActionsDTO> listDTO = new List<ActionsDTO>();
+                if (list != null)
+                {
+                    foreach (Actions a in list)
+                    {
+                        listDTO.Add(new ActionsDTO(a));
+                    }
+                }
+                Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                return listDTO;
+            }
+            else
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                return null;
+            }
+        }
+
+        [Route("Play")]
+        [HttpPost]
+        public void Play([FromBody] ActionsDTO actionsDTO)
+        {
+            PlayerDTO pDto = HttpContext.Session.GetObject<PlayerDTO>("player");
+           
+            if (pDto != null)
+            {
+                Actions action = new Actions
+                {
+                    actionName = actionsDTO.actionName,
+                    actionEffection = actionsDTO.actionEffection,
+                    actionId = actionsDTO.actionId
+                };
+                  Pets p = new Pets();
+                  p.Play(action, pDto.UserName);
+                  Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+            }
+        }
+
+        //h
 
         //[Route("GetPets")]
         //[Route("GetAllGames")]
@@ -93,6 +143,7 @@ namespace TamaguchiWebAPI.Controllers
 
         [Route("GetAnimals")]
         [HttpGet]
+        public List<PetsDTO> GetAnimals()
         //public List<PetsDTO> GetPets()
         public List<PetsDTO> GetAnimals()
         {
@@ -106,6 +157,7 @@ namespace TamaguchiWebAPI.Controllers
                 {
                     foreach (Pets pa in p.Pets)
                     {
+                        list.Add(new PetsDTO(pa));
                         list.Add(new PetsDTO(pa));
                     }
                 }
