@@ -82,9 +82,9 @@ namespace TamaguchiWebAPI.Controllers
             {
                 Actions action = new Actions
                 {
-                    actionName = actionsDTO.actionName,
-                    actionEffection = actionsDTO.actionEffection,
-                    actionId = actionsDTO.actionId
+                    ActionName = actionsDTO.actionName,
+                    ActionEffection = actionsDTO.actionEffection,
+                    ActionId = actionsDTO.actionId
                 };
                   Pets p = new Pets();
                   p.Play(action, pDto.UserName);
@@ -143,8 +143,7 @@ namespace TamaguchiWebAPI.Controllers
 
         [Route("GetAnimals")]
         [HttpGet]
-        public List<PetsDTO> GetAnimals()
-        //public List<PetsDTO> GetPets()
+        
         public List<PetsDTO> GetAnimals()
         {
             PlayerDTO pDto = HttpContext.Session.GetObject<PlayerDTO>("player");
@@ -158,7 +157,7 @@ namespace TamaguchiWebAPI.Controllers
                     foreach (Pets pa in p.Pets)
                     {
                         list.Add(new PetsDTO(pa));
-                        list.Add(new PetsDTO(pa));
+                        
                     }
                 }
                 Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
