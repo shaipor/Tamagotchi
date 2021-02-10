@@ -92,55 +92,6 @@ namespace TamaguchiWebAPI.Controllers
             }
         }
 
-        //h
-
-        //[Route("GetPets")]
-        //[Route("GetAllGames")]
-        //[HttpGet]
-        //public List<ActionsDTO> GetAllGames()
-        //{
-        //    PlayerDTO pDto = HttpContext.Session.GetObject<PlayerDTO>("player");
-        //    //Check if user logged in!
-        //    if (pDto != null)
-        //    {
-        //        List<Action> list = context.GetAllGames();
-        //        List<ActionsDTO> listDTO = new List<ActionsDTO>();
-        //        if (list != null)
-        //        {
-        //            foreach (Action a in list)
-        //            {
-        //                listDTO.Add(new ActionsDTO(a));
-        //            }
-        //        }
-        //        Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-        //        return listDTO;
-        //    }
-        //    else
-        //    {
-        //        Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-        //        return null;
-        //    }
-        //}
-
-        //[Route("Play")]
-        //[HttpPost]
-        //public void Play([FromBody] ActionsDTO actionsDTO)
-        //{
-        //    PlayerDTO pDto = HttpContext.Session.GetObject<PlayerDTO>("player");
-        //    //Check if user logged in!
-        //    if (pDto != null)
-        //    {
-        //        Actions action = new Actions
-        //        {
-        //            ActionName = actionsDTO.actionName,
-        //            ActionEffection = actionsDTO.actionEffection,
-        //            ActionId = actionsDTO.actionId
-        //        };
-        //        context.Play(action, pDto.UserName);
-        //        Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-        //    }
-        //}
-
         [Route("GetAnimals")]
         [HttpGet]
         
