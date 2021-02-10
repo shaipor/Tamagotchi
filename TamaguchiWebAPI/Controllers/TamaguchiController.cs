@@ -155,7 +155,7 @@ namespace TamaguchiWebAPI.Controllers
 
         [Route("FeedAnimal")]
         [HttpPost]
-        public void Feed([FromQuery] int actionId)
+        public void Feed([FromBody] int actionId)
         {
             PlayerDTO pDto = HttpContext.Session.GetObject<PlayerDTO>("player");
 
