@@ -56,6 +56,11 @@ namespace TamaguchiBL.Models
                 newAction.HungerLevel = this.HungerLevel;
                 newAction.HygieneLevel = this.HygieneLevel;
                 newAction.HappinesLevel = this.HappinesLevel;
+                //newAction.LifeCycle = db.LifeCycles.Where(a => a.LifeCycleId == this.LifeCycleId).FirstOrDefault();
+                //newAction.Pet = db.Pets.Where(p => p.PetId == this.PetId).FirstOrDefault();
+                newAction.UserName = this.UserName;
+
+
 
                 
 
