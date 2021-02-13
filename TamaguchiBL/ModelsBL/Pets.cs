@@ -26,47 +26,55 @@ namespace TamaguchiBL.Models
 
         public void FeedAnimal(Actions at)
         {
-            int hungerLevel = this.HungerLevel;
-            //write the activity
-            Actions activity = new Actions();
-
-            int ActionTypeId = at.ActionTypeId;
-            //Add more logic here!!
-            double weigth = this.Weigth + 0.5 * this.Weigth;
-            if (this.HungerLevel + activity.ActionEffection <= 5)
-                hungerLevel = this.HungerLevel + activity.ActionEffection;
-            else
-                this.HungerLevel = 5;
-            if (this.HungerLevel >= 3)
-                this.StatusId = 1;
-
-            using (var db = new TamagotchiContext())
+            try
             {
-                //update the animal
-                this.Weigth = weigth;
-                ActionsHistory newAction = new ActionsHistory();
-                //newAction.UserName = UIMain.CurrentPlayer.UserName;
-                newAction.StatusId = this.StatusId;
-                newAction.PetId = this.PetId;
-                newAction.PetAge = this.PetAge;
-                newAction.Action = at;
-                newAction.ActionId = at.ActionId;
-                newAction.ActionTime = DateTime.Now;
-                newAction.LifeCycleId = this.LifeCycleId;
-                newAction.HungerLevel = this.HungerLevel;
-                newAction.HygieneLevel = this.HygieneLevel;
-                newAction.HappinesLevel = this.HappinesLevel;
-                //newAction.LifeCycle = db.LifeCycles.Where(a => a.LifeCycleId == this.LifeCycleId).FirstOrDefault();
-                //newAction.Pet = db.Pets.Where(p => p.PetId == this.PetId).FirstOrDefault();
-                newAction.UserName = this.UserName;
+                int hungerLevel = this.HungerLevel;
+                //write the activity
+                Actions activity = new Actions();
+
+                int ActionTypeId = at.ActionTypeId;
+                //Add more logic here!!
+                double weigth = this.Weigth + 0.5 * this.Weigth;
+                if (this.HungerLevel + activity.ActionEffection <= 5)
+                    hungerLevel = this.HungerLevel + activity.ActionEffection;
+                else
+                    this.HungerLevel = 5;
+                if (this.HungerLevel >= 3)
+                    this.StatusId = 1;
+
+                using (var db = new TamagotchiContext())
+                {
+                    //update the animal
+                    this.Weigth = weigth;
+                    ActionsHistory newAction = new ActionsHistory();
+                    //newAction.UserName = UIMain.CurrentPlayer.UserName;
+                    newAction.StatusId = this.StatusId;
+                    newAction.PetId = this.PetId;
+                    newAction.PetAge = this.PetAge;
+                    newAction.Action = at;
+                    newAction.ActionId = at.ActionId;
+                    newAction.ActionTime = DateTime.Now;
+                    newAction.LifeCycleId = this.LifeCycleId;
+                    newAction.HungerLevel = this.HungerLevel;
+                    newAction.HygieneLevel = this.HygieneLevel;
+                    newAction.HappinesLevel = this.HappinesLevel;
+                    //newAction.LifeCycle = db.LifeCycles.Where(a => a.LifeCycleId == this.LifeCycleId).FirstOrDefault();
+                    //newAction.Pet = db.Pets.Where(p => p.PetId == this.PetId).FirstOrDefault();
+                    newAction.UserName = this.UserName;
 
 
 
-                
 
-                //this.ActionsHistory.Add(newAction);
-               db.AddActionHistory(newAction);
-               db.SaveChanges();
+
+                    //this.ActionsHistory.Add(newAction);
+                    db.AddActionHistory(newAction);
+                    db.SaveChanges();
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("somthing went wrong");
+                Console.WriteLine(e);
             }
             
         }
