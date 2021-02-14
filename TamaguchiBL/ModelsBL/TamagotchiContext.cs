@@ -32,7 +32,15 @@ namespace TamaguchiBL.Models
         }
         public void AddActionHistory(ActionsHistory ah)
         {
-            this.ActionsHistory.Add(ah);
+            try
+            {
+                this.ActionsHistory.Add(ah);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("somthing went wrong{0}",e);
+            }
+           
         }
         public void AddPet(Pets p)
         {

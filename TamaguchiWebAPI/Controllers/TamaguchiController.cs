@@ -155,19 +155,31 @@ namespace TamaguchiWebAPI.Controllers
 
         [Route("FeedAnimal")]
         [HttpPost]
-        public void Feed([FromBody] int actionId)
+        public void Feed([FromQuery] int actionId)
         {
             PlayerDTO pDto = HttpContext.Session.GetObject<PlayerDTO>("player");
 
             if (pDto != null)
             {
                 Players p = context.Players.Where(pp => pp.UserName == pDto.UserName).FirstOrDefault();
-                p.Pets.Where(a => a.LifeCycleId == 0).FirstOrDefault().FeedAnimal(context.Actions.Where(x=>x.ActionId== actionId).FirstOrDefault());
+                Actions ac =context.Actions.Where(a => a.ActionId == actionId).FirstOrDefault();
+                Pets pe = p.Pets.Where(a => a.LifeCycleId == 0).FirstOrDefault();
+                if ( pe== null)
+                    Console.WriteLine("there is no active pet");
+                else
+                {
+                    pe.FeedAnimal(ac);
+
+                    Console.WriteLine($"the pet ate {ac.ActionName}");
+                    Console.ReadKey();
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+
+                    return;
+                }
+                //p.Pets.Where(a => a.LifeCycleId == 0).FirstOrDefault().FeedAnimal(context.Actions.Where(x=>x.ActionId== actionId).FirstOrDefault());
                  
                 
-                Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-
-                return ;
+              
             }
             else
             {
