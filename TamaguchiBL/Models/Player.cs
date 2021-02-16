@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
+
+#nullable disable
 
 namespace TamaguchiBL.Models
 {
     [Table("Players", Schema = "main")]
-    public partial class Players
+    public partial class Player
     {
-        public Players()
+        public Player()
         {
-            Pets = new HashSet<Pets>();
+            ActionsHistories = new HashSet<ActionsHistory>();
+            Pets = new HashSet<Pet>();
         }
 
         [Key]
@@ -34,7 +38,9 @@ namespace TamaguchiBL.Models
         [StringLength(20)]
         public string Password { get; set; }
 
-        [InverseProperty("UserNameNavigation")]
-        public virtual ICollection<Pets> Pets { get; set; }
+        [InverseProperty(nameof(ActionsHistory.UserNameNavigation))]
+        public virtual ICollection<ActionsHistory> ActionsHistories { get; set; }
+        [InverseProperty(nameof(Pet.UserNameNavigation))]
+        public virtual ICollection<Pet> Pets { get; set; }
     }
 }

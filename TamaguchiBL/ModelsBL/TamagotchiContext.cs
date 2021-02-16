@@ -12,7 +12,7 @@ namespace TamaguchiBL.Models
     public partial class TamagotchiContext
     {
 
-        public Players Login(String userName, String password)
+        public Player Login(String userName, String password)
         {
             var data = this.Players.Where(s => s.UserName.Equals(userName) && s.Password.Equals(password)).ToList();
             if (data.Count == 1)
@@ -25,7 +25,7 @@ namespace TamaguchiBL.Models
             }
         }
 
-        public void AddPlayer(Players p)
+        public void AddPlayer(Player p)
         {
             this.Players.Add(p);
 
@@ -34,7 +34,7 @@ namespace TamaguchiBL.Models
         {
             try
             {
-                this.ActionsHistory.Add(ah);
+                this.ActionsHistories.Add(ah);
             }
             catch(Exception e)
             {
@@ -42,31 +42,56 @@ namespace TamaguchiBL.Models
             }
            
         }
-        public void AddPet(Pets p)
+        public void FeedAnimal(Pet p, Action feed)
+        {
+            try { 
+            p.FeedAnimal(feed);
+            ActionsHistory newAction = this.ActionsHistories.CreateProxy();
+            //newAction.UserName = UIMain.CurrentPlayer.UserName;
+            newAction.StatusId = p.StatusId;
+            newAction.PetAge = p.PetAge;
+            newAction.ActionTime = DateTime.Now;
+
+                newAction.LifeCycle = p.LifeCycle;
+                newAction.HungerLevel = p.HungerLevel;
+            newAction.HygieneLevel = p.HygieneLevel;
+            newAction.HappinesLevel = p.HappinesLevel;
+            //newAction.UserName = p.UserName;
+
+
+            p.ActionsHistories.Add(newAction);
+            this.SaveChanges();
+            }
+            catch(Exception e)
+            {
+              
+            }
+        }
+        public void AddPet(Pet p)
         {
             this.Pets.Add(p);
 
         }
-        public List<Actions> showFeedingActions()
+        public List<Action> showFeedingActions()
         {
             const int Feedind_Id = 1;
-            List<Actions> list = this.Actions.Where(a => a.ActionTypeId == Feedind_Id).ToList();
+            List<Action> list = this.Actions.Where(a => a.ActionTypeId == Feedind_Id).ToList();
             return list;
 
         }
 
-        public List<Actions> GetAllGames()
+        public List<Action> GetAllGames()
         {
             const int PLAYINGID = 2;
-            List<Actions> list = this.Actions.Where(a => a.ActionTypeId == PLAYINGID).ToList();
+            List<Action> list = this.Actions.Where(a => a.ActionTypeId == PLAYINGID).ToList();
             return list;
 
         }
 
-        public bool IsAlive(Players p)
+        public bool IsAlive(Player p)
         {
             const int DEAD_STATUS = 4;
-            foreach (Pets a in p.Pets)
+            foreach (Pet a in p.Pets)
             {
                 if (a.StatusId != DEAD_STATUS)
                     return true;

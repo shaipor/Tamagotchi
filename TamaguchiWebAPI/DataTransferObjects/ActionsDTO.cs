@@ -14,7 +14,7 @@ namespace TamaguchiWebAPI.DataTransferObjects
         public int actionEffection { get; set; }
         
         public ActionsDTO() { }
-        public ActionsDTO(Actions a)
+        public ActionsDTO(TamaguchiBL.Models.Action a)
         {
             actionId = a.ActionId;
             actionName = a.ActionName;

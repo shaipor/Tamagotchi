@@ -25,7 +25,7 @@ namespace TamaguchiWebAPI.Controllers
         [HttpGet]
         public PlayerDTO Login([FromQuery] string userName, [FromQuery] string pass)
         {
-            Players p = context.Login(userName, pass);
+            Player p = context.Login(userName, pass);
 
             //Check user name and password.
             if (p != null)
@@ -53,11 +53,11 @@ namespace TamaguchiWebAPI.Controllers
            
             if (pDto != null)
             {
-                List<Actions> list = context.GetAllGames();
+                List<TamaguchiBL.Models.Action> list = context.GetAllGames();
                 List<ActionsDTO> listDTO = new List<ActionsDTO>();
                 if (list != null)
                 {
-                    foreach (Actions a in list)
+                    foreach (TamaguchiBL.Models.Action a in list)
                     {
                         listDTO.Add(new ActionsDTO(a));
                     }
@@ -80,13 +80,13 @@ namespace TamaguchiWebAPI.Controllers
            
             if (pDto != null)
             {
-                Actions action = new Actions
+                TamaguchiBL.Models.Action action = new TamaguchiBL.Models.Action
                 {
                     ActionName = actionsDTO.actionName,
                     ActionEffection = actionsDTO.actionEffection,
                     ActionId = actionsDTO.actionId
                 };
-                  Pets p = new Pets();
+                  Pet p = new Pet();
                   p.Play(action, pDto.UserName);
                   Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
             }
@@ -101,11 +101,11 @@ namespace TamaguchiWebAPI.Controllers
             //Check if user logged in!
             if (pDto != null)
             {
-                Players p = context.Players.Where(pp => pp.UserName == pDto.UserName).FirstOrDefault();
+                Player p = context.Players.Where(pp => pp.UserName == pDto.UserName).FirstOrDefault();
                 List<PetsDTO> list = new List<PetsDTO>();
                 if (p != null)
                 {
-                    foreach (Pets pa in p.Pets)
+                    foreach (Pet pa in p.Pets)
                     {
                         list.Add(new PetsDTO(pa));
                         
@@ -130,12 +130,12 @@ namespace TamaguchiWebAPI.Controllers
 
             if (pDto != null)
             {
-                Players p = context.Players.Where(pp => pp.UserName == pDto.UserName).FirstOrDefault();
+                Player p = context.Players.Where(pp => pp.UserName == pDto.UserName).FirstOrDefault();
                 List<ActionsDTO> list = new List<ActionsDTO>();
 
                 if (p != null)
                 {
-                    foreach (Actions ac in context.showFeedingActions())
+                    foreach (TamaguchiBL.Models.Action ac in context.showFeedingActions())
                     {
 
                         list.Add(new ActionsDTO(ac));
@@ -161,14 +161,14 @@ namespace TamaguchiWebAPI.Controllers
 
             if (pDto != null)
             {
-                Players p = context.Players.Where(pp => pp.UserName == pDto.UserName).FirstOrDefault();
-                Actions ac =context.Actions.Where(a => a.ActionId == actionId).FirstOrDefault();
-                Pets pe = p.Pets.Where(a => a.LifeCycleId == 0).FirstOrDefault();
+                Player p = context.Players.Where(pp => pp.UserName == pDto.UserName).FirstOrDefault();
+                TamaguchiBL.Models.Action ac =context.Actions.Where(a => a.ActionId == actionId).FirstOrDefault();
+                Pet pe = p.Pets.Where(a => a.LifeCycleId == 1).FirstOrDefault();
                 if ( pe== null)
                     Console.WriteLine("there is no active pet");
                 else
                 {
-                    pe.FeedAnimal(ac);
+                    context.FeedAnimal(pe,ac);
 
                     Console.WriteLine($"the pet ate {ac.ActionName}");
                     Console.ReadKey();
@@ -195,7 +195,7 @@ namespace TamaguchiWebAPI.Controllers
 
             if (pDto != null)
             {
-                Players p = context.Players.Where(pp => pp.UserName == pDto.UserName).FirstOrDefault();
+                Player p = context.Players.Where(pp => pp.UserName == pDto.UserName).FirstOrDefault();
                 return p.HasActiveAnimal();
             }
             else

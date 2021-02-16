@@ -8,7 +8,7 @@ using System.Linq;
 namespace TamaguchiBL.Models
 {
 
-    public partial class Players
+    public partial class Player
     {
         public bool HasActiveAnimal()
         {
@@ -20,8 +20,8 @@ namespace TamaguchiBL.Models
             const int DEAD_STATUS = 4;
 
 
-            Pets pt = this.Pets.Where(p => p.StatusId != DEAD_STATUS).FirstOrDefault();
-            List<Object> list = (from ActionsHistory in pt.ActionsHistory
+            Pet pt = this.Pets.Where(p => p.StatusId != DEAD_STATUS).FirstOrDefault();
+            List<Object> list = (from ActionsHistory in pt.ActionsHistories
                                  where (ActionsHistory.PetId == pt.PetId)
                                  select new
                                  {

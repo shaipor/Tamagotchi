@@ -8,23 +8,24 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TamaguchiBL.Models
 {
-    [Table("PetStatus", Schema = "main")]
-    public partial class PetStatus
+    [Table("LifeCycles", Schema = "main")]
+    public partial class LifeCycle
     {
-        public PetStatus()
+        public LifeCycle()
         {
             ActionsHistories = new HashSet<ActionsHistory>();
             Pets = new HashSet<Pet>();
         }
 
         [Key]
-        public int StatusId { get; set; }
+        public int LifeCycleId { get; set; }
         [StringLength(20)]
-        public string StatusName { get; set; }
+        public string CycleName { get; set; }
+        public int CycleDuration { get; set; }
 
-        [InverseProperty(nameof(ActionsHistory.Status))]
+        [InverseProperty(nameof(ActionsHistory.LifeCycle))]
         public virtual ICollection<ActionsHistory> ActionsHistories { get; set; }
-        [InverseProperty(nameof(Pet.Status))]
+        [InverseProperty(nameof(Pet.LifeCycle))]
         public virtual ICollection<Pet> Pets { get; set; }
     }
 }

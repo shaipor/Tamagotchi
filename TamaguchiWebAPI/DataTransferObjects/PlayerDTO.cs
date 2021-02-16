@@ -17,7 +17,7 @@ namespace TamaguchiWebAPI.DataTransferObjects
             public string Gender { get; set; }
             public string Password { get; set; }
             public PlayerDTO() { }
-            public PlayerDTO(Players p)
+            public PlayerDTO(Player p)
             {
 
                 //PlayerDTO P = new PlayerDTO();
