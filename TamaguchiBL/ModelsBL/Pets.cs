@@ -83,12 +83,12 @@ namespace TamaguchiBL.Models
         {
             int HappinesLevel = this.HappinesLevel;
             //write the activity
-            Actions activity = new Actions();
+            //Actions activity = new Actions();
 
             int ActionTypeId = a.ActionTypeId;
             //Add more logic here!!
-            if (this.HappinesLevel + activity.ActionEffection <= 5)
-                HappinesLevel = this.HappinesLevel + activity.ActionEffection;
+            if (this.HappinesLevel + a.ActionEffection <= 5)
+                HappinesLevel = this.HappinesLevel + a.ActionEffection;
             else
                 this.HappinesLevel = 5;
             if (this.HappinesLevel >= 3)
