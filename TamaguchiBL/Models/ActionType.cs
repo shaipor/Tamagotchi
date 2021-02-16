@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
+
+#nullable disable
 
 namespace TamaguchiBL.Models
 {
     [Table("ActionTypes", Schema = "main")]
-    public partial class ActionTypes
+    public partial class ActionType
     {
-        public ActionTypes()
+        public ActionType()
         {
-            Actions = new HashSet<Actions>();
+            Actions = new HashSet<Action>();
         }
 
         [Key]
@@ -22,7 +25,7 @@ namespace TamaguchiBL.Models
         public bool IsAffectingHappines { get; set; }
         public bool IsAffectingHygiene { get; set; }
 
-        [InverseProperty("ActionType")]
-        public virtual ICollection<Actions> Actions { get; set; }
+        [InverseProperty(nameof(Action.ActionType))]
+        public virtual ICollection<Action> Actions { get; set; }
     }
 }

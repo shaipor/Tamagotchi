@@ -8,6 +8,14 @@ namespace TamaguchiBL.Models
     
     public partial class ActionsHistory
     {
-     
+        public ActionsHistory()
+        {
+
+        }
+        public ActionsHistory(Action ac)
+        {
+            this.Action = ac;
+        }
+        
     }
 }

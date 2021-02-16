@@ -21,7 +21,7 @@ namespace TamaguchiWebAPI.DataTransferObjects
         public int LifeCycleId { get; set; }
 
         public PetsDTO() { }
-        public PetsDTO(Pets a)
+        public PetsDTO(Pet a)
         {
             petId = a.PetId;
             petName = a.PetName;

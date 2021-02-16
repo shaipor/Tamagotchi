@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
+
+#nullable disable
 
 namespace TamaguchiBL.Models
 {
     [Table("Actions", Schema = "main")]
-    public partial class Actions
+    public partial class Action
     {
-        public Actions()
+        public Action()
         {
-            ActionsHistory = new HashSet<ActionsHistory>();
+            ActionsHistories = new HashSet<ActionsHistory>();
         }
 
         [Key]
@@ -22,9 +25,9 @@ namespace TamaguchiBL.Models
         public int ActionEffection { get; set; }
 
         [ForeignKey(nameof(ActionTypeId))]
-        [InverseProperty(nameof(ActionTypes.Actions))]
-        public virtual ActionTypes ActionType { get; set; }
-        [InverseProperty("Action")]
-        public virtual ICollection<ActionsHistory> ActionsHistory { get; set; }
+        [InverseProperty("Actions")]
+        public virtual ActionType ActionType { get; set; }
+        [InverseProperty(nameof(ActionsHistory.Action))]
+        public virtual ICollection<ActionsHistory> ActionsHistories { get; set; }
     }
 }

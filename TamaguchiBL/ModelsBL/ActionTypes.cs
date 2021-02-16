@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace TamaguchiBL.Models
 {
    
-    public partial class ActionTypes
+    public partial class ActionType
     {
         
     }

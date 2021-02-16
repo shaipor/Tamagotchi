@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
+
+#nullable disable
 
 namespace TamaguchiBL.Models
 {
     [Table("Pets", Schema = "main")]
-    public partial class Pets
+    public partial class Pet
     {
-        public Pets()
+        public Pet()
         {
-            ActionsHistory = new HashSet<ActionsHistory>();
+            ActionsHistories = new HashSet<ActionsHistory>();
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PetId { get; set; }
         [Required]
         [StringLength(20)]
@@ -32,13 +34,16 @@ namespace TamaguchiBL.Models
         public int StatusId { get; set; }
         public int LifeCycleId { get; set; }
 
+        [ForeignKey(nameof(LifeCycleId))]
+        [InverseProperty("Pets")]
+        public virtual LifeCycle LifeCycle { get; set; }
         [ForeignKey(nameof(StatusId))]
         [InverseProperty(nameof(PetStatus.Pets))]
         public virtual PetStatus Status { get; set; }
         [ForeignKey(nameof(UserName))]
-        [InverseProperty(nameof(Players.Pets))]
-        public virtual Players UserNameNavigation { get; set; }
-        [InverseProperty("Pet")]
-        public virtual ICollection<ActionsHistory> ActionsHistory { get; set; }
+        [InverseProperty(nameof(Player.Pets))]
+        public virtual Player UserNameNavigation { get; set; }
+        [InverseProperty(nameof(ActionsHistory.Pet))]
+        public virtual ICollection<ActionsHistory> ActionsHistories { get; set; }
     }
 }
