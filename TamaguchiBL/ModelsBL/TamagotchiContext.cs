@@ -86,7 +86,7 @@ namespace TamaguchiBL.Models
                 action.HungerLevel = p.HungerLevel;
                 action.HygieneLevel = p.HygieneLevel;
                 action.HappinesLevel = p.HappinesLevel;
-
+                action.UserName = p.UserName;
 
                 p.ActionsHistories.Add(action);
                 this.SaveChanges();
