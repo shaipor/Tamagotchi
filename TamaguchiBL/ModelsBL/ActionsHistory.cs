@@ -18,9 +18,8 @@ namespace TamaguchiBL.Models
         }
         public ActionsHistory(Action ac,Pet p)
         {
-            this.ActionId = ac.ActionId;
-            this.Action = ac;
             this.Pet = p;
+            this.Action = ac;
             this.Status = p.Status;
             this.StatusId = p.StatusId;
             this.PetAge = p.PetAge;
