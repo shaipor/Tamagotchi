@@ -36,36 +36,35 @@ namespace TamaguchiBL.Models
             {
                 this.ActionsHistories.Add(ah);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                Console.WriteLine("somthing went wrong{0}",e);
+                Console.WriteLine("somthing went wrong{0}", e);
             }
-           
+
         }
         public void FeedAnimal(Pet p, Action feed)
         {
-            try 
-            { 
-                p.FeedAnimal(feed);
-                ActionsHistory newAction = this.ActionsHistories.CreateProxy();
-                //newAction.UserName = UIMain.CurrentPlayer.UserName;
-                newAction.StatusId = p.StatusId;
-                newAction.PetAge = p.PetAge;
-                newAction.ActionTime = DateTime.Now;
-                 newAction.LifeCycle = p.LifeCycle;
-                 newAction.HungerLevel = p.HungerLevel;
-                newAction.HygieneLevel = p.HygieneLevel;
-                newAction.HappinesLevel = p.HappinesLevel;
-                //newAction.UserName = p.UserName;
+            try { 
+            p.FeedAnimal(feed);
+            ActionsHistory newAction = this.ActionsHistories.CreateProxy();
+            //newAction.UserName = UIMain.CurrentPlayer.UserName;
+            newAction.StatusId = p.StatusId;
+            newAction.PetAge = p.PetAge;
+            newAction.ActionTime = DateTime.Now;
+
+                newAction.LifeCycle = p.LifeCycle;
+                newAction.HungerLevel = p.HungerLevel;
+            newAction.HygieneLevel = p.HygieneLevel;
+            newAction.HappinesLevel = p.HappinesLevel;
+            //newAction.UserName = p.UserName;
 
 
-                p.ActionsHistories.Add(newAction);
-                this.SaveChanges();
+            p.ActionsHistories.Add(newAction);
+            this.SaveChanges();
             }
-
             catch(Exception e)
             {
-              
+
             }
         }
 
