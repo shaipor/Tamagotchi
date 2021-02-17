@@ -80,14 +80,17 @@ namespace TamaguchiWebAPI.Controllers
            
             if (pDto != null)
             {
+
+                Player p = context.Players.Where(pp => pp.UserName == pDto.UserName).FirstOrDefault();
+                Pet pet = p.Pets.Where(a => a.LifeCycleId == 1).FirstOrDefault();
                 TamaguchiBL.Models.Action action = new TamaguchiBL.Models.Action
                 {
                     ActionName = actionsDTO.actionName,
                     ActionEffection = actionsDTO.actionEffection,
                     ActionId = actionsDTO.actionId
                 };
-                  Pet p = new Pet();
-                  p.Play(action, pDto.UserName);
+                  
+                  context.Play(pet, action);
                   Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
             }
         }
@@ -111,6 +114,8 @@ namespace TamaguchiWebAPI.Controllers
                         
                     }
                 }
+
+                
                 Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
 
                 return list;

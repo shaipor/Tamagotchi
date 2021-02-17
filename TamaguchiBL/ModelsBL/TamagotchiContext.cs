@@ -44,27 +44,58 @@ namespace TamaguchiBL.Models
         }
         public void FeedAnimal(Pet p, Action feed)
         {
-            try { 
-            p.FeedAnimal(feed);
-            ActionsHistory newAction = this.ActionsHistories.CreateProxy();
-            //newAction.UserName = UIMain.CurrentPlayer.UserName;
-            newAction.StatusId = p.StatusId;
-            newAction.PetAge = p.PetAge;
-            newAction.ActionTime = DateTime.Now;
+            try 
+            { 
+                p.FeedAnimal(feed);
+                ActionsHistory newAction = this.ActionsHistories.CreateProxy();
+                //newAction.UserName = UIMain.CurrentPlayer.UserName;
+                newAction.StatusId = p.StatusId;
+                newAction.PetAge = p.PetAge;
+                newAction.ActionTime = DateTime.Now;
+                 newAction.LifeCycle = p.LifeCycle;
+                 newAction.HungerLevel = p.HungerLevel;
+                newAction.HygieneLevel = p.HygieneLevel;
+                newAction.HappinesLevel = p.HappinesLevel;
+                //newAction.UserName = p.UserName;
 
-                newAction.LifeCycle = p.LifeCycle;
-                newAction.HungerLevel = p.HungerLevel;
-            newAction.HygieneLevel = p.HygieneLevel;
-            newAction.HappinesLevel = p.HappinesLevel;
-            //newAction.UserName = p.UserName;
 
-
-            p.ActionsHistories.Add(newAction);
-            this.SaveChanges();
+                p.ActionsHistories.Add(newAction);
+                this.SaveChanges();
             }
+
             catch(Exception e)
             {
               
+            }
+        }
+
+        public void Play(Pet p, Action play)
+        {
+            try
+            {
+
+                p.Play(play);
+                //p.HappinesLevel += play.ActionEffection;
+                //if (p.HappinesLevel > 5)
+                //    p.HappinesLevel = 5;
+
+                ActionsHistory action = this.ActionsHistories.CreateProxy();
+                action.StatusId = p.StatusId;
+                action.PetAge = p.PetAge;
+                action.ActionTime = DateTime.Now;
+                action.LifeCycle = p.LifeCycle;
+                action.HungerLevel = p.HungerLevel;
+                action.HygieneLevel = p.HygieneLevel;
+                action.HappinesLevel = p.HappinesLevel;
+
+
+                p.ActionsHistories.Add(action);
+                this.SaveChanges();
+            }
+
+            catch (Exception e)
+            {
+
             }
         }
         public void AddPet(Pet p)

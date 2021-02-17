@@ -26,50 +26,57 @@ namespace TamaguchiBL.Models
 
        
             public void FeedAnimal(Action at)
-        {
-            try
             {
-                int hungerLevel = this.HungerLevel;
-                //write the activity
+                try
+                {
+                    int hungerLevel = this.HungerLevel;
+                    //write the activity
                
 
-                int ActionTypeId = at.ActionTypeId;
-                //Add more logic here!!
-                double weigth = this.Weigth + 0.5 * this.Weigth;
-                if (this.HungerLevel + at.ActionEffection <= 5)
-                    hungerLevel = this.HungerLevel + at.ActionEffection;
-                else
-                    this.HungerLevel = 5;
-                if (this.HungerLevel >= 3)
-                    this.StatusId = 1;
+                    int ActionTypeId = at.ActionTypeId;
+                    //Add more logic here!!
+                    double weigth = this.Weigth + 0.5 * this.Weigth;
+                    if (this.HungerLevel + at.ActionEffection <= 5)
+                        hungerLevel = this.HungerLevel + at.ActionEffection;
+                    else
+                        this.HungerLevel = 5;
+                    if (this.HungerLevel >= 3)
+                        this.StatusId = 1;
 
                
-                    //update the animal
-                    this.Weigth = weigth;
+                        //update the animal
+                        this.Weigth = weigth;
                    
                 
-            }
-            catch(Exception e)
-            {
+                }
+                catch(Exception e)
+                {
                 
-            }
+                }
             
-        }
+            }
 
-        public void Play(Action a, string userName)
+        public void Play(Action a)
         {
-            int HappinesLevel = this.HappinesLevel;
-            //write the activity
-            Action activity = new Action();
-
-            int ActionTypeId = a.ActionTypeId;
-            //Add more logic here!!
-            if (this.HappinesLevel + activity.ActionEffection <= 5)
-                HappinesLevel = this.HappinesLevel + activity.ActionEffection;
-            else
+            this.HappinesLevel += a.ActionEffection;
+            if (this.HappinesLevel > 5)
                 this.HappinesLevel = 5;
-            if (this.HappinesLevel >= 3)
-                this.StatusId = 1;
+
+
+
+            //int HappinesLevel = this.HappinesLevel;
+            ////write the activity
+            //Action activity = new Action();
+            //int ActionTypeId = a.ActionTypeId;
+            ////Add more logic here!!
+            //if (this.HappinesLevel + activity.ActionEffection <= 5)
+            //    HappinesLevel = this.HappinesLevel + activity.ActionEffection;
+            //else
+            //    this.HappinesLevel = 5;
+
+           
+            //if (this.HappinesLevel >= 3)
+            //    this.StatusId = 1;
 
             //using (var context = new TamagotchiContext())
             //{
@@ -92,7 +99,7 @@ namespace TamaguchiBL.Models
             //    context.AddActionHistory(newAction);
             //    context.SaveChanges();
             //}
-           
+
         }
 
         //public bool HasActiveAnimal(Players player)
